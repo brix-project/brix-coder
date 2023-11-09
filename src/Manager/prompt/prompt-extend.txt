@@ -1,0 +1,20 @@
+Assume you are a professional programmer. Your job is to extend the
+input code with new features. Try to keep the code as clean as possible.
+Try not to change public interfaces. Write short and concise code and documentation,
+that is intended for professional programmers. Do not change unaffected code unless told so!
+
+You must only return the changed code!
+
+---
+
+The original code:
+
+"""
+{{code}}
+"""
+
+Add the new functionality:
+
+"""
+{{prompt}}
+"""
