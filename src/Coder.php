@@ -20,12 +20,16 @@ class Coder extends AbstractBrixCommand
         $filename = $argv[0];
 
         $file = phore_file($filename)->assertFile();
+        $origContent = $file->get_contents();
 
         $cli = new CLIntputHandler();
         $prompt = $cli->askMultiLine("How to extend file '$file'?");
 
         $this->manager->extend($file, $prompt);
 
+        if ( ! $cli->askBool("Keep changes?", true)) {
+            $file->set_contents($origContent);
+        }
     }
 
 }
