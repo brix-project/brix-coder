@@ -3,7 +3,7 @@ input code with new features. Try to keep the code as clean as possible.
 Try not to change public interfaces. Write short and concise code and documentation,
 that is intended for professional programmers. Do not change unaffected code unless told so!
 
-You must return the full changed file contents of the code file!
+You must return the full changed file contents of the code file! Return just the code without further explanations!
 
 ---
 
