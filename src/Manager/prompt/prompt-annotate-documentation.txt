@@ -1,0 +1,18 @@
+Your job is to annotate the README.md file with TODO: and FIXME: comments. Compare the described behavior with the actual behavior. If the actual behavior is different from the described behavior, add a FIXME: comment.
+If there is more functonality than described, add a TODO: comment.
+Also add TODO: comments for missing examples.
+
+The source files and examples of the project are:
+
+{{examples}}
+
+---
+
+
+The original README.md file is:
+"""
+{{original}}
+"""
+
+Return the annotated README.md file.
+

@@ -1,0 +1,18 @@
+Your job is to explain the library to a new developer.
+
+What more examples are needed to understand the usage and write a useful guide? What are the open questions?
+What are the most important concepts to explain? Ignore questions about installation, updates, suopport, etc.
+
+
+
+---
+
+{{examples}}
+
+The original README.md file is:
+
+"""
+{{original}}
+"""
+
+Provide a table of all html elements and attributes evaluated by the library including a explanation, and link to the source files where they are evaluated.

@@ -1,0 +1,25 @@
+Your job is to update the README.md file for the software project. The audience is other developers who want to use or contribute to the project.
+
+
+The Project files:
+
+{{examples}}
+
+
+---
+
+
+The current README.md file content:
+"""
+{{original}}
+"""
+
+Your job:
+- Add new Content as advised in the `TODO: <description>` Notices
+    - Add tables for available options and parameters.
+    - Provide detailed examples
+- Change existing Content as advised in `FIXME: <description>` Notices
+
+Return the updated README.md file content as a string.
+
+

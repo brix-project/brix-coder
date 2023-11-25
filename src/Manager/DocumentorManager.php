@@ -14,8 +14,8 @@ class DocumentorManager
 
     protected function generateExampleString(string $exampleDir) : string {
         $example = "";
-        foreach (phore_dir($exampleDir)->listFiles() as $file) {
-            $example .= "\n\n// Example: " . $file->getUri() . "\n";
+        foreach (phore_dir($exampleDir)->listFiles(null, true) as $file) {
+            $example .= "\n\nFile: /" . $file->getRelPath() . "\n";
             $example .= "\"\"\"\n";
             $example .= $file->get_contents() . "\n\"\"\"\n";
         }
@@ -23,14 +23,36 @@ class DocumentorManager
     }
 
 
-    public function createDocumentation(string $filename, string $exampleDir) {
+    public function updateDocumentation(string $filename, string $exampleDir) {
         $filename = phore_file($filename);
         $filename->touch();
 
-        $this->brixEnv->getOpenAiQuickFacet()->promptStreamToFile(__DIR__ . "/prompt/prompt-generate-documentation.txt", [
-            "examples" => $this->generateExampleString($exampleDir),
+        $this->brixEnv->getOpenAiQuickFacet()->promptStreamToFile(__DIR__ . "/prompt/prompt-update-documentation.txt", [
+            "examples" => $this->generateExampleString($exampleDir) . "\n" . $this->generateExampleString("src"),
+            "original" => $filename->get_contents()
+        ], $filename);
+
+    }
+
+     public function annotateDocumentation(string $filename, string $exampleDir) {
+        $filename = phore_file($filename);
+        $filename->touch();
+
+        $this->brixEnv->getOpenAiQuickFacet()->promptStreamToFile(__DIR__ . "/prompt/prompt-annotate-documentation.txt", [
+            "examples" => $this->generateExampleString($exampleDir) . "\n" . $this->generateExampleString("src"),
             "original" => $filename->get_contents()
         ], $filename);
     }
+
+    public function askForExamples(string $filename, string $exampleDir) {
+        $filename = phore_file($filename);
+        $filename->touch();
+
+        $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-ask-for-examples.txt", [
+            "examples" => $this->generateExampleString($exampleDir). "\n" . $this->generateExampleString("src"),
+            "original" => "", //$filename->get_contents()
+        ]);
+    }
+
 
 }

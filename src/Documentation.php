@@ -6,6 +6,7 @@ use Brix\Coder\Manager\CoderManager;
 use Brix\Coder\Manager\DocumentorManager;
 use Brix\Core\AbstractBrixCommand;
 use Phore\Cli\CLIntputHandler;
+use Phore\Cli\Input\In;
 
 class Documentation extends AbstractBrixCommand
 {
@@ -18,19 +19,46 @@ class Documentation extends AbstractBrixCommand
     }
 
     public function update(array $argv) {
-        $filename = $argv[0];
+        $readme = $this->brixEnv->rootDir->withRelativePath("README.md")->assertFile();
 
-        $file = phore_file($filename)->assertFile();
-        $origContent = $file->get_contents();
+        $origContent = $readme->get_contents();
 
 
         $examples = $this->brixEnv->rootDir->withRelativePath("examples")->assertDirectory();
-        $readme = $examples->withRelativePath("README.md")->assertFile();
-        $this->manager->createDocumentation($readme, $examples);
+
+        $this->manager->updateDocumentation($readme, $examples);
 
         if ( ! In::AskBool("Keep changes?", true)) {
-            $file->set_contents($origContent);
+            $readme->set_contents($origContent);
         }
+    }
+    public function annotate(array $argv) {
+        $filename = $argv[0];
+        $readme = $this->brixEnv->rootDir->withRelativePath("README.md")->assertFile();
+
+        $origContent = $readme->get_contents();
+
+
+        $examples = $this->brixEnv->rootDir->withRelativePath("examples")->assertDirectory();
+
+        $this->manager->annotateDocumentation($readme, $examples);
+
+        if ( ! In::AskBool("Keep changes?", true)) {
+            $readme->set_contents($origContent);
+        }
+    }
+    public function ask(array $argv) {
+        $filename = $argv[0];
+        $readme = $this->brixEnv->rootDir->withRelativePath("README.md")->assertFile();
+
+        $origContent = $readme->get_contents();
+
+
+        $examples = $this->brixEnv->rootDir->withRelativePath("examples")->assertDirectory();
+
+        $this->manager->askForExamples($readme, $examples);
+
+
     }
 
 }
