@@ -4,6 +4,8 @@ The project files (including examples):
 
 {{examples}}
 
+Name and purpose of the Project: {{nameAndPurpose}}
+
 ---
 
 Your job is to create a new README.md file optimized for experienced developers. Imagine you are a developer who is actually

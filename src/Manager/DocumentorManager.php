@@ -72,11 +72,12 @@ class DocumentorManager
         ], $filename);
     }
  
-    public function createReadme($filename, $job) {
+    public function createReadme($filename, $nameAndPurpose) {
         $filename = phore_file($filename);
 
         $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-create-readme.txt", [
             "examples" => $this->generateExampleString(),
+            "nameAndPurpose" => $nameAndPurpose
         ]);   
         $filename->set_contents($data);
     }
