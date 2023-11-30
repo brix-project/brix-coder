@@ -15,4 +15,10 @@ The original README.md file is:
 {{original}}
 """
 
-Provide a table of all html elements and attributes evaluated by the library including a explanation, and link to the source files where they are evaluated.
+Provide the information:
+- Is there a similar library? What is the difference?
+- What is the purpose of the library?
+- What are the most important concepts?
+- What are the most important functions?
+- What are the most important parameters?
+- What to be improved?

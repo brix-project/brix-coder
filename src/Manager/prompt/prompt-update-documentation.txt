@@ -14,11 +14,10 @@ The current README.md file content:
 {{original}}
 """
 
-Your job:
-- Add new Content as advised in the `TODO: <description>` Notices
-    - Add tables for available options and parameters.
-    - Provide detailed examples
-- Change existing Content as advised in `FIXME: <description>` Notices
+Rules for updating the README.md file content:
+- Add new Content as advised in the `TODO: <description>` notices within the README.md content. Add tables for available options and parameters. Provide detailed examples
+- Change existing Content as advised in `FIXME: <description>` Notices within the README.md content
+- If you cannot fullfill the requests in the `TODO:` and `FIXME:` notices or it is unclear on how to fulfill it, preserve them and add a comment to the notice explaining why.
 
 Return the updated README.md file content as a string.
 

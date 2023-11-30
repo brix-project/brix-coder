@@ -1,2 +1,4 @@
 coder:
-
+    include:
+        - ./src/
+        - ./examples/
