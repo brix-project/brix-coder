@@ -82,7 +82,7 @@ class DocumentorManager
         $filename->set_contents($data);
     }
     
-    public function updateReadme(string $filename, string $job) {
+    public function updateReadme(string $filename) {
         $filename = phore_file($filename)->assertFile();
 
         $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-update-readme.txt", [

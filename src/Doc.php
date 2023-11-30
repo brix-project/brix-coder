@@ -42,13 +42,12 @@ class Doc extends AbstractBrixCommand
         
 
         if ( ! $filename->exists()) {
-            $job = In::AskMultiLine("New Readme: What should i do?");
+            $job = In::AskMultiLine("New Readme: What is the name and purpose (npm name)?");
             $this->manager->createReadme($filename, $job);
 
         } else {
             $origContent = $filename->get_contents();
-            $job = In::AskMultiLine("Existing Readme: What should i edit?");
-            $this->manager->updateReadme($filename, $job);
+            $this->manager->updateReadme($filename);
         }
 
 
