@@ -1,0 +1,22 @@
+Your create a part of a developer documentation in Markdown format for the framework located in /src and the examples located in /examples.
+
+The project files (including examples):
+
+{{examples}}
+
+---
+
+Your job is to create a fragment of documentation covering the following topics and or job description:
+
+"""
+{{input}}
+"""
+
+Your tasks:
+- Create the fragment
+- Provide full prototype of functions and methods parameter and return values.
+- Remove all code that is not needed to demonstrate the functionality of the framework.
+- Add additional explanations using comments whithin the examples.
+- Extend the examples to cover all functionality of the framework.
+
+Return only the content of the new documentation fragment to console.

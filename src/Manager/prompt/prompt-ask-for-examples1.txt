@@ -1,0 +1,13 @@
+Your job is to write examples in /examples covering all functions and parameters of the library in /src.
+
+The project files (including examples):
+
+{{examples}}
+
+---
+
+Your tasks:
+- Create a table of features and group them by purpose (Decorator, Filter, etc.) and by Usage Type (Templating, Routing, etc.)
+- What examples are missing? If you are able provide a short example.
+- Which examples are unclear or need more comments?
+- Provide a short description of all functions and parameters

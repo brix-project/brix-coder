@@ -4,6 +4,7 @@ namespace Brix\Coder\Manager;
 
 use Brix\Coder\Type\T_CoderConfig;
 use Brix\Core\Type\BrixEnv;
+use Phore\Cli\Input\In;
 
 class DocumentorManager
 {
@@ -46,7 +47,6 @@ class DocumentorManager
             }
 
         }
-
         return $example;
     }
 
@@ -58,7 +58,7 @@ class DocumentorManager
         $this->brixEnv->getOpenAiQuickFacet()->promptStreamToFile(__DIR__ . "/prompt/prompt-update-documentation.txt", [
             "examples" => $this->generateExampleString(),
             "original" => $filename->get_contents()
-        ], $filename);
+        ], $filename, true);
 
     }
 
@@ -71,15 +71,71 @@ class DocumentorManager
             "original" => $filename->get_contents()
         ], $filename);
     }
+ 
+    public function createReadme($filename, $job) {
+        $filename = phore_file($filename);
 
-    public function askForExamples(string $filename, string $exampleDir) {
+        $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-create-readme.txt", [
+            "examples" => $this->generateExampleString(),
+        ]);   
+        $filename->set_contents($data);
+    }
+    
+    public function updateReadme(string $filename, string $job) {
+        $filename = phore_file($filename)->assertFile();
+
+        $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-update-readme.txt", [
+            "examples" => $this->generateExampleString(),
+            "content" => $filename->get_contents(),
+        ]);
+        $filename->set_contents($data);
+    }
+    
+    
+    
+    
+    
+    public function createFragment($filename, $job) {
+        $filename = phore_file($filename);
+
+        $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-create-fragment.txt", [
+            "examples" => $this->generateExampleString(),
+            "input" => $job
+        ]);   
+        $filename->set_contents($data);
+    }
+    
+    public function updateFragment(string $filename, string $job) {
+        $filename = phore_file($filename)->assertFile();
+
+        $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-update-fragment.txt", [
+            "examples" => $this->generateExampleString(),
+            "filename" => $filename->getBasename(),
+            "content" => $filename->get_contents(),
+            "job" => $job
+        ]);   
+        $filename->set_contents($data);
+    }
+    
+    /**
+     * Optimize the example file
+     * 
+     * @param string $filename
+     * @return void
+     * @throws \Phore\FileSystem\Exception\FileAccessException
+     * @throws \Phore\FileSystem\Exception\FileNotFoundException
+     * @throws \Phore\FileSystem\Exception\FilesystemException
+     */
+    public function optimizeExample(string $filename) {
         $filename = phore_file($filename);
         $filename->touch();
 
-        $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-ask-for-examples.txt", [
-            "examples" => $this->generateExampleString($exampleDir). "\n" . $this->generateExampleString("src"),
-            "original" => "", //$filename->get_contents()
+        $data = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt/prompt-optimize-example.txt", [
+            "examples" => $this->generateExampleString($exampleDir),
+            "filename" => $filename->getBasename(),
+            "input" => $filename->get_contents(), //$filename->get_contents()
         ]);
+        $filename->set_contents($data);
     }
 
 

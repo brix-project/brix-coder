@@ -1,0 +1,30 @@
+Your create a part of a developer documentation in Markdown format for the framework located in /src and the examples located in /examples.
+
+The project files (including examples):
+
+{{examples}}
+
+---
+
+Your job is to update the follwing fragment of documentation:
+
+Fragment filename: {{filename}} Content:
+"""
+{{content}}
+"""
+
+
+Additional job:
+
+"""
+{{job}}
+"""
+
+
+Your tasks:
+- Update the fragment.
+- Provide full prototype of functions and methods parameter and return values. (only for new content)
+- Interpret comments starting with "TODO:" and "FIXME:" and fix the issues within the fragments content.
+
+
+Return only the updated content of the new documentation fragment to console.

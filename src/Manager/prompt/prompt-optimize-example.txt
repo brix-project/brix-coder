@@ -1,0 +1,28 @@
+Your job is to optimize the examples located in /examples for the framework located in /src.
+
+The project files (including examples):
+
+{{examples}}
+
+---
+
+Now you optimize only the following example file:
+
+Filename: {{filename}}
+"""
+{{input}}
+"""
+
+Your tasks:
+- Reduce the existing example: Remove third party styles and framework. Modify examples to focus only on the functionality defined in /src.
+- Remove all code that is not needed to demonstrate the functionality of the framework.
+- Try to demonstrate each functionality only once.
+- Interpret comments starting with "TODO:" and "FIXME:" and fix the issues within the example.
+- Add additional explanations using comments whithin the examples.
+- Extend the examples to cover all functionality of the framework.
+
+- Add a comment demonstrating how to use the example (if not possible within the example itself).
+- Add a comment on top of the example about what the example is about and what it should demonstrate.
+- Add a comment on the bottom of the content about what: is wrong, what is unclear, what could be demonstrated better, what is missing, etc. (if applicable).
+
+Return only the modified file content to console. The content should be a valid / executable file.
