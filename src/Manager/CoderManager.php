@@ -61,7 +61,7 @@ class CoderManager
             "editfile" => $filename,
             "code" => phore_file($filename)->get_contents(),
             "prompt" => $prompt
-        ], $filename);
+        ], $filename, noAppend: true);
     }
 
 

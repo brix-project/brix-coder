@@ -25,4 +25,4 @@ Instructions on how to edit the orginal code file:
 {{prompt}}
 """
 
-Return the full changed file contents of the code file! Return just the file content without further explanations!
+Important: You must return the full changed file contents of the code file (no '...rest oft file...' etc.)! Return just the file content without further explanations!
