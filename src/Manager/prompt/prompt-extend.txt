@@ -6,20 +6,23 @@ that is intended for professional programmers. Do not change unaffected code unl
 
 You must return the full changed file contents of the code file! Return just the code without further explanations!
 
+For Reference: All project files:
+
+{{files}}
+
 ---
 
-The original code file is:
+The original code file ({{editfile}}) content is:
+
 
 """
 {{code}}
 """
 
-"""
-{{code}}
-"""
-
-Add the new functionality:
+Instructions on how to edit the orginal code file:
 
 """
 {{prompt}}
 """
+
+Return the full changed file contents of the code file! Return just the file content without further explanations!
