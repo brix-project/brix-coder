@@ -9,5 +9,10 @@ class T_CoderConfig
      * @var string[]
      */
     public array $include = [];
-    
+
+    /**
+     * @var string[]
+     */
+    public array $exclude = [];
+
 }

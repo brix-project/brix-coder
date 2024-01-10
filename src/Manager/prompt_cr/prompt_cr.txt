@@ -1,0 +1,8 @@
+The project files are defined with filename and content in the json data:
+`{{fileData}}`
+
+
+---
+Your job is to perform the job description provided in file `.brix-job/job.md`.
+
+Return only the resulting json data. Do not skip data. Try to provide only patch data. Change as little as required.

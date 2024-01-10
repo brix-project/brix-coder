@@ -2,3 +2,7 @@ coder:
     include:
         - ./src/
         - ./examples/
+        - ./.brix-job/
+    exclude:
+        - ./vendor/
+        - ./node_modules
