@@ -14,16 +14,16 @@ class T_ChangeRequestResult_File
 
 
     /**
-     * If the file is updated: Provide the patch as unified diff
+     * If the file is updated: Provide the patch as unified diff (output of diff)
      *
      * @var string|null
      */
-    public string|null $patch;
+    public string|null $patch = null;
 
     /**
      * If the file is new: Provide the content of the file
      *
      * @var string|null
      */
-    public string|null $content;
+    public string|null $content = null;
 }

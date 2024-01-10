@@ -49,6 +49,19 @@ class ChangeRequestManager
         ], T_ChangeRequestResult::class, true);
 
 
+        $rootDir = $this->brixEnv->rootDir;
+        $i = 0;
+        foreach ($files->files as $file) {
+            $i++;
+            if ($file->patch !== null) {
+                echo "Patch: " . $rootDir->withRelativePath("patch-$i.diff") . "\n";
+                $rootDir->withRelativePath("patch-$i.diff")->asFile()->set_contents($file->patch);
+                continue;
+            }
+            echo "File: " . $rootDir->withRelativePath($file->filename) . "\n";
+            $rootDir->withRelativePath($file->filename)->asFile()->createPath()->set_contents($file->content);
+        }
+
 
 
     }
