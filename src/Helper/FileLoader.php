@@ -58,7 +58,7 @@ class FileLoader
      * @throws \Phore\FileSystem\Exception\FileAccessException
      * @throws \Phore\FileSystem\Exception\FileNotFoundException
      */
-    public function generateFileContent() : array {
+    public function generateFileContent(bool $string = false) : string {
         // Load contents of .gitignore
         $gitIgnore = phore_file($this->rootDir . "/.gitignore")->get_contents_array();
         $exampleDir = $this->rootDir;
@@ -86,13 +86,13 @@ class FileLoader
                 $incUri = phore_uri("/" . $include . "/". $file->getRelPath())->clean();
                 echo "\nIncluding: " . $incUri . "";
                 $files[] = [
-                    "filename" . $incUri,
+                    "path" => $incUri,
                     "content" => $file->get_contents()
                 ];
             }
 
         }
-        return $files;
+        return phore_json_pretty_print(json_encode($files));
     }
 
 

@@ -44,7 +44,7 @@ class ChangeRequestManager
 
 
         $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
-            "fileData" => phore_json_encode($fileLoader->generateFileContent()),
+            "fileData" => $fileLoader->generateFileContent(),
           //  "jobDescription" => $jobDescription
         ], T_ChangeRequestResult::class, true);
 
@@ -58,8 +58,8 @@ class ChangeRequestManager
                 $rootDir->withRelativePath("patch-$i.diff")->asFile()->set_contents($file->patch);
                 continue;
             }
-            echo "File: " . $rootDir->withRelativePath($file->filename) . "\n";
-            $rootDir->withRelativePath($file->filename)->asFile()->createPath()->set_contents($file->content);
+            echo "File: " . $rootDir->withRelativePath($file->path) . "\n";
+            $rootDir->withRelativePath($file->path)->asFile()->createPath()->set_contents($file->content);
         }
 
 

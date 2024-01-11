@@ -13,6 +13,19 @@ class T_ChangeRequestResult
      */
     public string $summary;
 
+
+    /**
+     * If you cannot perform the task due to missing information or invalid information provide details
+     * about wrong or missing information here. It will be displayed to the user in order to alter the job
+     * description.
+     *
+     * Set to null if no error occured.
+     *
+     * @var string|null
+     */
+    public string|null $errorMessage = null;
+
+
     /**
      * List of all new and updated files to perform the task
      *

@@ -1,7 +1,12 @@
-The project files are defined with filename and content in the json data: `{{fileData}}`
 
+If you are not able to perform the job due to missing information, provide errorMessage.
+
+Do not skip data. Try to provide only patch data. Use the output-format defined as json-schema.
 
 ---
 Your job is to perform the job description provided in file `.brix-job/job.md`.
 
-Do not skip data. Try to provide only patch data. Change as little as required. Use the output-format defined as json-schema.
+The project files are serialized in the json data `{{fileData}}` (including the filename and content).
+
+
+

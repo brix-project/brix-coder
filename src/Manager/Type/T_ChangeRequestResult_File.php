@@ -9,7 +9,7 @@ class T_ChangeRequestResult_File
      * The full path and filename of the existing or new file
      * @var string
      */
-    public string $filename;
+    public string $path;
 
 
 
