@@ -9,7 +9,6 @@ namespace Brix;
 use Brix\Coder\Coder;
 use Brix\Coder\CR;
 use Brix\Coder\Doc;
-use Brix\Coder\Documentation;
 use Brix\Core\Type\BrixEnv;
 use Phore\Cli\CliDispatcher;
 
