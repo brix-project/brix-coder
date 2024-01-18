@@ -2,6 +2,7 @@
 
 namespace Brix\Coder\Manager;
 
+use Brix\Coder\Helper\ExampleLoader;
 use Brix\Coder\Helper\FileLoader;
 use Brix\Coder\Manager\Type\T_ChangeRequestResult;
 use Brix\Coder\Type\T_CoderConfig;
@@ -42,9 +43,11 @@ class ChangeRequestManager
 
         $fileLoader = new FileLoader($this->brixEnv->rootDir, $this->config->include, $this->config->exclude);
 
+        $exampleLoader = new ExampleLoader($this->brixEnv->rootDir, ["./node_modules/", "./vendor/"]);
 
         $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
             "fileData" => $fileLoader->generateFileContent(),
+            "exampleData" => $exampleLoader->generateFileContent(),
           //  "jobDescription" => $jobDescription
         ], T_ChangeRequestResult::class, true);
 
@@ -53,11 +56,15 @@ class ChangeRequestManager
         $i = 0;
         foreach ($files->files as $file) {
             $i++;
+            /*
             if ($file->patch !== null) {
-                echo "Patch: " . $rootDir->withRelativePath("patch-$i.diff") . "\n";
-                $rootDir->withRelativePath("patch-$i.diff")->asFile()->set_contents($file->patch);
+                $patchFile =  $rootDir->withRelativePath("patch-$i.diff")->asFile();
+                echo "Patch: " . $patchFile . "\n";
+                $patchFile->set_contents($file->patch);
+                phore_exec("patch -p1 < " .$patchFile);
                 continue;
             }
+            */
             echo "File: " . $rootDir->withRelativePath($file->path) . "\n";
             $rootDir->withRelativePath($file->path)->asFile()->createPath()->set_contents($file->content);
         }

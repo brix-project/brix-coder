@@ -8,6 +8,8 @@ Do not skip data. Try to provide only patch data. Use the output-format defined 
 
 Imagine the current project files are serializes as json data: `{{fileData}}` (including the filename and content).
 
+Imagein the library documentaion files are serialized as json data: `{{exampleData}}` (including the filename and content).
+
 ---
 
 Your job is to perform the job description provided in file `.brix-job/job.md`.
