@@ -86,7 +86,7 @@ class FileLoader
                 $incUri = phore_uri("/" . $include . "/". $file->getRelPath())->clean();
                 echo "\nIncluding: " . $incUri . "";
                 $files[] = [
-                    "path" => $incUri,
+                    "path" => (string)$incUri,
                     "content" => $file->get_contents()
                 ];
             }
