@@ -61,8 +61,6 @@ class ExampleLoader
             }
 
         }
-        echo phore_json_pretty_print(json_encode($files));
-        exit;
         return phore_json_pretty_print(json_encode($files));
     }
 
