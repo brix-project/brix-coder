@@ -11,18 +11,13 @@ class T_ChangeRequestResult_File
      */
     public string $path;
 
-
-
-    /**
-     * If the file is updated: Provide the patch as Unified Diff Format (Unified Format)
-     *
-     *
-     * @var string|null
-     */
-    //public string|null $patch = null;
+    
 
     /**
-     * If the file is new: Provide the content of the file
+     * Provide the full new content of the file
+     * 
+     * - YOU MUST preserve lines and logic and text that is unaffected by the change
+     * - YOU MUST output the full file content
      *
      * @var string|null
      */
