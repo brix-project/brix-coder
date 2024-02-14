@@ -60,7 +60,9 @@ class FileLoader
      */
     public function generateFileContent(bool $string = false) : string {
         // Load contents of .gitignore
-        $gitIgnore = phore_file($this->rootDir . "/.gitignore")->get_contents_array();
+        $gitIgnore = [];
+        if ($this->rootDir->withFileName(".gitignore")->exists())
+            $gitIgnore = phore_file($this->rootDir . "/.gitignore")->get_contents_array();
         $exampleDir = $this->rootDir;
         $files = [];
         foreach ($this->includePaths as $include) {
