@@ -68,8 +68,8 @@ class FileLoader
         foreach ($this->includePaths as $include) {
             if (phore_uri($exampleDir . "/". $include)->isFile()) {
                 $files[] = [
-                    "filename" => $include,
-                    "content" => phore_dir($exampleDir . "/" . $include)->asFile()->get_contents()
+                    "path" => $include,
+                    "content" => ChunkReaderWriter::StringToChunk(phore_dir($exampleDir . "/" . $include)->asFile()->get_contents())
                 ];
                 continue;
             }
@@ -89,7 +89,7 @@ class FileLoader
                 echo "\nIncluding: " . $incUri . "";
                 $files[] = [
                     "path" => (string)$incUri,
-                    "content" => $file->get_contents()
+                    "content" => ChunkReaderWriter::StringToChunk($file->get_contents())
                 ];
             }
 

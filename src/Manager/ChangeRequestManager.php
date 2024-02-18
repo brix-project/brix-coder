@@ -2,6 +2,7 @@
 
 namespace Brix\Coder\Manager;
 
+use Brix\Coder\Helper\ChunkReaderWriter;
 use Brix\Coder\Helper\ExampleLoader;
 use Brix\Coder\Helper\FileLoader;
 use Brix\Coder\Manager\Type\T_ChangeRequestResult;
@@ -54,8 +55,9 @@ class ChangeRequestManager
 
         $rootDir = $this->brixEnv->rootDir;
         $i = 0;
-        foreach ($files->files as $file) {
+        foreach ($files->files as $fileCr) {
             $i++;
+            
             /*
             if ($file->patch !== null) {
                 $patchFile =  $rootDir->withRelativePath("patch-$i.diff")->asFile();
@@ -65,8 +67,9 @@ class ChangeRequestManager
                 continue;
             }
             */
-            echo "File: " . $rootDir->withRelativePath($file->path) . "\n";
-            $rootDir->withRelativePath($file->path)->asFile()->createPath()->set_contents($file->content);
+            echo "File: " . $rootDir->withRelativePath($fileCr->path) . "\n";
+            $file = $rootDir->withRelativePath($fileCr->path)->asFile()->createPath();
+            $file->set_contents(ChunkReaderWriter::ChunkUpdateFile($file->exists() ? $file->get_contents() : "", $fileCr->content));
         }
 
 

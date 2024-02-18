@@ -55,7 +55,7 @@ class ExampleLoader
                     if ($exampleFile->isDirectory()) continue;
                     $files[] = [
                         "path" => (string)$exampleFile->rel($exampleDir),
-                        "content" => $exampleFile->get_contents()
+                        "content" => ChunkReaderWriter::StringToChunk($exampleFile->get_contents())
                     ];
                 }
             }
