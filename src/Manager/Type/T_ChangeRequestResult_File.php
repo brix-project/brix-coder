@@ -13,8 +13,7 @@ class T_ChangeRequestResult_File
      *
      * - USE ONLY existing chunk indexes as keys.
      * - TO REMOVE CHUNKS: Set the chunk content to empty string "".
-     * - TO ADD NEW LINES: Rewrite the chunk index by adding additional lines.
-     * - ALWAYS REMEMBER to include original lines that are not changed within changed chunks! Do not remove them.
+     * - TO ADD NEW LINES: Append or prepend new lines to the end of existing chunks! Do not just replace chunk content with new lines! You must append or prepend the existing content of changed chunks!
      * - YOU HAVE TO make sure the updated chunks fit into the original file content.
      * - YOU MUST omit chunks ids if the content remains unchanged.
      *
