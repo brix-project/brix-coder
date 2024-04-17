@@ -30,8 +30,8 @@ class CR extends AbstractBrixCommand
 
     }
 
-    public function perform(array $argv) {
-        $this->manager->performTasks();
+    public function perform(array $argv, bool $chunk = false) {
+        $this->manager->performTasks($chunk);
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Brix\Coder\Manager\Type;
+namespace Brix\Coder\Manager\Type\Chunk;
 
 class T_ChangeRequestResult_File
 {

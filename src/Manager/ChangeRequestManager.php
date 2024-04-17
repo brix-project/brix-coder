@@ -32,8 +32,66 @@ class ChangeRequestManager
 
     }
 
+    private function performUpdateTask($fileLoader, $exampleLoader) {
+        $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
+            "fileData" => $fileLoader->generateFileContent(),
+            "exampleData" => $exampleLoader->generateFileContent(),
+            //  "jobDescription" => $jobDescription
+        ], T_ChangeRequestResult::class, true);
 
-    public function performTasks()
+
+        $rootDir = $this->brixEnv->rootDir;
+        $i = 0;
+        foreach ($files->files as $fileCr) {
+            $i++;
+
+
+            echo "File: " . $rootDir->withRelativePath($fileCr->path) . "\n";
+            $file = $rootDir->withRelativePath($fileCr->path)->asFile()->createPath();
+            $file->set_contents(ChunkReaderWriter::ChunkUpdateFile($file->exists() ? $file->get_contents() : "", $fileCr->content));
+        }
+    }
+
+    private function performChukTask($fileLoader, $exampleLoader) {
+        $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
+            "fileData" => $fileLoader->generateFileContent(),
+            "exampleData" => $exampleLoader->generateFileContent(),
+            //  "jobDescription" => $jobDescription
+        ], \Brix\Coder\Manager\Type\Chunk\T_ChangeRequestResult::class, true);
+
+
+        $rootDir = $this->brixEnv->rootDir;
+        $i = 0;
+        foreach ($files->files as $fileCr) {
+            $i++;
+
+
+            echo "File: " . $rootDir->withRelativePath($fileCr->path) . "\n";
+            $file = $rootDir->withRelativePath($fileCr->path)->asFile()->createPath();
+            $file->set_contents(ChunkReaderWriter::ChunkUpdateFile($file->exists() ? $file->get_contents() : "", $fileCr->content));
+        }
+    }
+
+    private function performFullFileTask($fileLoader, $exampleLoader) {
+        $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
+            "fileData" => $fileLoader->generateFileContent(),
+            "exampleData" => $exampleLoader->generateFileContent(),
+            //  "jobDescription" => $jobDescription
+        ], \Brix\Coder\Manager\Type\FullFile\T_ChangeRequestResult::class, true);
+
+
+        $rootDir = $this->brixEnv->rootDir;
+        $i = 0;
+        foreach ($files->files as $fileCr) {
+            $i++;
+
+
+            echo "File: " . $rootDir->withRelativePath($fileCr->path) . "\n";
+            $file = $rootDir->withRelativePath($fileCr->path)->asFile()->createPath();
+            $file->set_contents($fileCr->content);
+        }
+    }
+    public function performTasks($chunkMode = false)
     {
         $jobRoot = $this->brixEnv->rootDir->withRelativePath(".brix-job");
         if ( ! $jobRoot->isDirectory())
@@ -46,31 +104,14 @@ class ChangeRequestManager
 
         $exampleLoader = new ExampleLoader($this->brixEnv->rootDir, ["./node_modules/", "./vendor/"]);
 
-        $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
-            "fileData" => $fileLoader->generateFileContent(),
-            "exampleData" => $exampleLoader->generateFileContent(),
-          //  "jobDescription" => $jobDescription
-        ], T_ChangeRequestResult::class, true);
 
 
-        $rootDir = $this->brixEnv->rootDir;
-        $i = 0;
-        foreach ($files->files as $fileCr) {
-            $i++;
-            
-            /*
-            if ($file->patch !== null) {
-                $patchFile =  $rootDir->withRelativePath("patch-$i.diff")->asFile();
-                echo "Patch: " . $patchFile . "\n";
-                $patchFile->set_contents($file->patch);
-                phore_exec("patch -p1 < " .$patchFile);
-                continue;
-            }
-            */
-            echo "File: " . $rootDir->withRelativePath($fileCr->path) . "\n";
-            $file = $rootDir->withRelativePath($fileCr->path)->asFile()->createPath();
-            $file->set_contents(ChunkReaderWriter::ChunkUpdateFile($file->exists() ? $file->get_contents() : "", $fileCr->content));
+        if ($chunkMode) {
+            $this->performChukTask($fileLoader, $exampleLoader);
+        } else {
+            $this->performFullFileTask($fileLoader, $exampleLoader);
         }
+
 
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Brix\Coder\Manager\Type;
+namespace Brix\Coder\Manager\Type\FullFile;
 
 class T_ChangeRequestResult
 {
