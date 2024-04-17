@@ -1,5 +1,5 @@
 coder:
-    example_dir: ~
+    exampleDir: ~
     # Replace Example Dir wit relative path e.g. ./examples/ to benefit from brixcoder code completion
     include:
         - ./src/

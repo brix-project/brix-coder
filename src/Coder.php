@@ -3,6 +3,7 @@
 namespace Brix\Coder;
 
 use Brix\Coder\Manager\CoderManager;
+use Brix\Coder\Type\T_CoderConfig;
 use Brix\Core\AbstractBrixCommand;
 use Phore\Cli\CLIntputHandler;
 
@@ -13,6 +14,7 @@ class Coder extends AbstractBrixCommand
     public function __construct()
     {
         parent::__construct();
+        $this->brixEnv->brixConfig->get("coder", T_CoderConfig::class, file_get_contents(__DIR__ . "/config_tpl.yml"));
         $this->manager = new CoderManager($this->brixEnv);
     }
 
