@@ -32,6 +32,16 @@ class FileLoader
     public function isExcluded(string $path) : bool
     {
         foreach ($this->excludePaths as $excludePath) {
+            // if the path starts with a / -> try to match the path from the beginning
+            if (str_starts_with($excludePath, "/")) {
+                if (substr($path, 0, strlen($excludePath)) === $excludePath)
+                    return true;
+            } else {
+                // test if the string is contained in the path
+                if (str_contains($path, $excludePath))
+                    return true;
+            }
+            
             if (fnmatch($excludePath, $path))
                 return true;
         }
@@ -77,16 +87,21 @@ class FileLoader
                 // Skip files that are ignored by .gitignore
 
                 if ($this->isGitIgnored($file->getRelPath())) {
-                    echo "\n\nSkipping [.gitignore]: " . $file->getRelPath() . "\n";
+                    echo "\nSkipping [.gitignore]: " . $file->getRelPath() . "";
                     continue;
                 }
                 if ($this->isExcluded($file->getRelPath())) {
-                    echo "\n\nSkipping [exclude]: " . $file->getRelPath() . "\n";
+                    echo "\nSkipping [exclude]: " . $file->getRelPath() . "";
                     continue;
                 }
 
                 $incUri = phore_uri("/" . $include . "/". $file->getRelPath())->clean();
+                if ($this->isExcluded((string)$incUri)) {
+                    echo "\nSkipping [exclude]: " . $file->getRelPath() . "";
+                    continue;
+                }
                 echo "\nIncluding: " . $incUri . "";
+                
                 $files[] = [
                     "path" => (string)$incUri,
                     "content" => ChunkReaderWriter::StringToChunk($file->get_contents())

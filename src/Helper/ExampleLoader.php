@@ -38,7 +38,7 @@ class ExampleLoader
                 // Skip files that are ignored by .gitignore
 
                 if ( ! $file->isDirectory()) continue;
-                echo "\n$file";
+               
                 $brixFile = $file->withRelativePath(".brix.yml");
                 if ( ! $brixFile->isFile()) continue;
 
@@ -53,6 +53,7 @@ class ExampleLoader
 
                 foreach ($examples->listFiles(null, true) as $exampleFile) {
                     if ($exampleFile->isDirectory()) continue;
+                    echo "\nAdding Example: " . $exampleFile->rel($exampleDir) . "";
                     $files[] = [
                         "path" => (string)$exampleFile->rel($exampleDir),
                         "content" => ChunkReaderWriter::StringToChunk($exampleFile->get_contents())
