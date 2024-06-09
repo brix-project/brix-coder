@@ -72,6 +72,28 @@ class ChangeRequestManager
         }
     }
 
+    public function askQuestion($question) : string
+    {
+        $jobRoot = $this->brixEnv->rootDir->withRelativePath(".brix-job");
+        if ( ! $jobRoot->isDirectory())
+            throw new \InvalidArgumentException("Job not found: " . $jobRoot);
+
+        // $jobDescription = $jobRoot->withFileName("job.md")->assertFile()->get_contents();
+
+
+        $fileLoader = new FileLoader($this->brixEnv->rootDir, $this->config->include, $this->config->exclude);
+
+        $exampleLoader = new ExampleLoader($this->brixEnv->rootDir, ["./node_modules/", "./vendor/"]);
+
+        $text = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr_ask.txt", [
+            "fileData" => $fileLoader->generateFileContent(),
+            "exampleData" => $exampleLoader->generateFileContent(),
+            "question" => $question,
+        ], null, true);
+
+        return $text;
+    }
+
     private function performFullFileTask($fileLoader, $exampleLoader) {
         $files = $this->brixEnv->getOpenAiQuickFacet()->promptData(__DIR__ . "/prompt_cr/prompt_cr.txt", [
             "fileData" => $fileLoader->generateFileContent(),

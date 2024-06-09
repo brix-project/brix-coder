@@ -19,6 +19,13 @@ class CR extends AbstractBrixCommand
     }
 
 
+    public function ask(array $argv)
+    {
+        $questiong = implode(" ", $argv);
+        echo $this->manager->askQuestion($questiong);
+
+    }
+
     public function create(array $argv) {
         $jobDesc = implode (" ", $argv);
 
