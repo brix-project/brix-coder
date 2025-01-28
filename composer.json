@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "brixlab/core": "dev-main"
+        "brixlab/core": "*"
     },
 
     "require-dev": {
